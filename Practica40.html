@@ -1,0 +1,41 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+
+<script>
+var accessToken = "37d119fef414cd9b3b6a2cca12e0ab4b0df17bd2";
+var deviceID = "1d0026000d47373334323233"
+var url = "https://api.particle.io/v1/devices/" + deviceID + "/on";
+var urlState = "https://api.particle.io/v1/devices/" + deviceID + "/state";
+
+
+function switchOn()
+{
+	$.post(url, {params: "on", access_token: accessToken });
+}  
+
+function callback(data, status){
+	if (status == "success") {
+		
+		setTimeout(getReading, 1000);
+	}
+	else {
+		alert("There was a problem");
+	}
+
+}
+function getReading(){
+   	$.get(urlState, {access_token: accessToken}, callback);
+}
+
+</script>
+</head>	
+
+<body>
+
+<h1>Alimentador de peces </h1>	
+	
+<input type="button" onClick="switchOn()" value="ON"/>
+	
+</body>
+</html>
